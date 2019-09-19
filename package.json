@@ -1,0 +1,31 @@
+{
+  "name": "zengine-migrator",
+  "version": "0.0.1",
+  "description": "CLI Tool for Setting Up Migration Environment for Zengine Plugins",
+  "main": "index.js",
+  "bin": {
+    "zmig": "index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Wizehive/zengine-migrator.git"
+  },
+  "keywords": [
+    "migration",
+    "zengine",
+    "plugins"
+  ],
+  "author": "Ben Steward <ben.steward@wizehive.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Wizehive/zengine-migrator/issues"
+  },
+  "homepage": "https://github.com/Wizehive/zengine-migrator#readme",
+  "dependencies": {
+    "commander": "^3.0.1",
+    "degit": "^2.1.4"
+  }
+}
