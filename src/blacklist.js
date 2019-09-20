@@ -8,7 +8,7 @@ const writeFile = promisify(fs.writeFile)
 
 module.exports = {
   blacklistDirs: {
-    'v2-src': 1,
+    'wrapper': 1,
     'vendor': 1
   },
   blacklistFiles: {
