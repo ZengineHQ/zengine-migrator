@@ -22,7 +22,8 @@ module.exports = async (err, entities) => {
       'maya_build',
       'backend',
       'firebase',
-      'plugins'
+      'plugins',
+      '.legacy-output'
     ].includes(entity.name)) {
       return console.error(`It appears you may be running this in the wrong directory. Aborting because "./${entity.name}" was found. If this is the right directory, rename "./${entity.name}" and try again.`)
     }
