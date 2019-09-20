@@ -13,7 +13,6 @@ module.exports = {
   },
   blacklistFiles: {
     'package.json': 1,
-    'package-lock.json': 1,
     '.gitignore': 1
   },
   blacklistHandlers: {
