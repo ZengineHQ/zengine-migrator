@@ -80,6 +80,11 @@ function mergePackageJSONs(originalPackage, wrapperPackage) {
   const [uniqueKeysObject, sharedKeys] = separateKeys(originalPackage, wrapperPackage)
 
   for (const key of sharedKeys) {
+    // Copy dependencies to both places, because of the unique (weird) legacy build process
+    if (key === 'dependencies') {
+      uniqueKeysObject.legacyDependencies = originalPackage[key]
+    }
+
     if (isValidObject(originalPackage[key]) && isValidObject(wrapperPackage[key])) {
       uniqueKeysObject[key] = mergePackageJSONs(originalPackage[key], wrapperPackage[key])
     } else {
