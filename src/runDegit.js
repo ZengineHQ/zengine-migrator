@@ -1,6 +1,6 @@
 const degit = require('degit')
 
-const REPO = 'tehpsalmist/wrapper-playground'
+const REPO = 'ZengineHQ/legacy-plugin-wrapper'
 
 module.exports = async () => {
   const degitter = degit(REPO, { force: true })
