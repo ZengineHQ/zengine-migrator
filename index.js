@@ -15,6 +15,6 @@ const { branch } = program
 
 fs.readdir(process.cwd(), { encoding: 'utf8', withFileTypes: true }, evaluateDirectory({ branch }))
 
-const notifier = updateNotifier({ pkg })
+const notifier = updateNotifier({ pkg, updateCheckInterval: 1 })
 
-notifier.notify('Run npm i -g ZengineHQ/zengine-migrator to update')
+notifier.notify()

@@ -1,6 +1,6 @@
 {
   "name": "zengine-migrator",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "CLI Tool for Setting Up Migration Environment for Zengine Plugins",
   "main": "index.js",
   "bin": {
