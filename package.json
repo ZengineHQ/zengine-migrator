@@ -26,7 +26,8 @@
   "homepage": "https://github.com/Wizehive/zengine-migrator#readme",
   "dependencies": {
     "commander": "^3.0.1",
-    "degit": "^2.1.4"
+    "degit": "^2.1.4",
+    "update-notifier": "^3.0.1"
   },
   "devDependencies": {
     "standard": "^14.3.1"
