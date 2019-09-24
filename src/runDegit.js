@@ -2,8 +2,8 @@ const degit = require('degit')
 
 const REPO = 'ZengineHQ/legacy-plugin-wrapper'
 
-module.exports = async () => {
-  const degitter = degit(REPO, { force: true })
+module.exports = async branch => {
+  const degitter = degit(`${REPO}${branch}`, { force: true })
 
   degitter.on('info', info => info.code === 'SUCCESS' && console.log(info.message))
 
