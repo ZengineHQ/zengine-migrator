@@ -14,6 +14,9 @@ npm i -g Wizehive/zengine-migrator
 cd plugins/my-cool-plugin # root directory of your FRONTEND source code (probably not repo top level)
 zmig # run the command!
 
+zmig --branch my-test-branch # clones ZengineHQ/legacy-plugin-wrapper#my-test-branch
+zmig -b my-test-branch # alias!
+
 # or...
 
 mkdir new-plugin-repo
