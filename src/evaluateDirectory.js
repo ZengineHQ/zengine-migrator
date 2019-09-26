@@ -23,7 +23,9 @@ module.exports = ({ branch, user }) => async (err, entities) => {
       'backend',
       'firebase',
       'plugins',
-      '.legacy-output'
+      '.legacy-output',
+      '.cache',
+      'dist'
     ].includes(entity.name)) {
       return console.error(`It appears you may be running this in the wrong directory. Aborting because "./${entity.name}" was found. If this is the right directory, rename "./${entity.name}" and try again.`)
     }

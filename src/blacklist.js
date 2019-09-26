@@ -2,7 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const promisify = require('./promisify')
 const { cache } = require('./cache')
-const appendFile = promisify(fs.appendFile)
+const readFile = promisify(fs.readFile)
 const deleteFile = promisify(fs.unlink)
 const writeFile = promisify(fs.writeFile)
 
@@ -52,11 +52,15 @@ module.exports = {
       const gitignorePath = path.resolve(process.cwd(), '.gitignore')
 
       if (fs.existsSync(gitignorePath) && contents) {
-        const appended = await appendFile(gitignorePath, `\n\n# Original File:\n\n${contents}`)
+        const newGitignore = await readFile(gitignorePath, { encoding: 'utf8' })
+
+        const withOrWithoutPackageLock = contents.includes('package-lock.json') : newGitignore ? newGitignore.replace('package-lock.json', '')
+
+        const written = await writeFile(gitignorePath, `${withOrWithoutPackageLock}\n\n# Original File:\n\n${contents}`)
           .catch(err => err instanceof Error ? err : new Error(JSON.stringify(err)))
           
-        if (appended instanceof Error) {
-          throw appended
+        if (written instanceof Error) {
+          throw written
         }
 
         const originalpath = path.resolve(process.cwd(), 'moved-.gitignore')
