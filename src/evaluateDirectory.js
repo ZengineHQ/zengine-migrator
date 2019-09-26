@@ -6,7 +6,7 @@ const { cacheFile, cache, moveCachedFile } = require('./cache')
 const { blacklistDirs, blacklistFiles, blacklistHandlers } = require('./blacklist')
 const runDegit = require('./runDegit')
 
-module.exports = ({ branch }) => async (err, entities) => {
+module.exports = ({ branch, user }) => async (err, entities) => {
   if (err) {
     return console.error(err)
   }
@@ -55,7 +55,7 @@ module.exports = ({ branch }) => async (err, entities) => {
     }
   }
 
-  const clonedSuccessfully = await runDegit(branch)
+  const clonedSuccessfully = await runDegit(user, branch)
 
   if (!clonedSuccessfully) {
     return console.error(`Unable to clone repository. Aborted.`)

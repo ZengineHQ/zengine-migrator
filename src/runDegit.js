@@ -1,9 +1,9 @@
 const degit = require('degit')
 
-const REPO = 'ZengineHQ/legacy-plugin-wrapper'
+const REPO = 'legacy-plugin-wrapper'
 
-module.exports = async branch => {
-  const degitter = degit(`${REPO}${branch}`, { force: true })
+module.exports = async (user, branch) => {
+  const degitter = degit(`${user}${REPO}${branch}`, { force: true })
 
   degitter.on('info', info => info.code === 'SUCCESS' && console.log(info.message))
 
@@ -11,7 +11,7 @@ module.exports = async branch => {
     .catch(err => err instanceof Error ? err : new Error(JSON.stringify(err)))
     
   if (cloned instanceof Error) {
-    return console.error(`Error running degit on ${REPO}: `, cloned)
+    return console.error(`Error running degit on ${user}${REPO}${branch}: `, cloned)
   }
 
   return 'Success!'
