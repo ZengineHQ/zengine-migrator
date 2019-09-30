@@ -5,6 +5,7 @@ const readFile = promisify(fs.readFile)
 const { cacheFile, cache, moveCachedFile } = require('./cache')
 const { blacklistDirs, blacklistFiles, blacklistHandlers } = require('./blacklist')
 const runDegit = require('./runDegit')
+const downloadCSS = require('./downloadCSS')
 
 module.exports = ({ branch, user }) => async (err, entities) => {
   if (err) {
@@ -73,4 +74,6 @@ module.exports = ({ branch, user }) => async (err, entities) => {
       }
     }
   }
+
+  await downloadCSS()
 }
