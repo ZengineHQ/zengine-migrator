@@ -1,4 +1,6 @@
-module.exports = function (fn) {
+const path = require('path')
+
+exports.promisify = fn => {
   return function (...args) {
     return new Promise(function (resolve, reject) {
       fn(...args, function (err, ...res) {
@@ -11,3 +13,5 @@ module.exports = function (fn) {
     })
   }
 }
+
+exports.relCwd = (...segments) => path.resolve(process.cwd(), ...segments)

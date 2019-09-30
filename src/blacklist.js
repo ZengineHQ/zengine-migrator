@@ -1,6 +1,6 @@
 const fs = require('fs')
 const path = require('path')
-const promisify = require('./promisify')
+const { promisify } = require('./utils')
 const { cache } = require('./cache')
 const readFile = promisify(fs.readFile)
 const deleteFile = promisify(fs.unlink)

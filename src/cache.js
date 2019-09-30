@@ -1,4 +1,6 @@
-const writeFile = require('./promisify')(require('fs').writeFile)
+const fs = require('fs')
+const { promisify } = require('./utils')
+const writeFile = promisify(fs.writeFile)
 
 const cache = {}
 

@@ -1,6 +1,6 @@
 const fs = require('fs')
 const path = require('path')
-const promisify = require('./promisify')
+const { promisify } = require('./utils')
 const readFile = promisify(fs.readFile)
 const { cacheFile, cache, moveCachedFile } = require('./cache')
 const { blacklistDirs, blacklistFiles, blacklistHandlers } = require('./blacklist')
