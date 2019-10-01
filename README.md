@@ -5,7 +5,7 @@ Set up your Zengine plugin for version 2 migration
 ## Install
 
 ```sh
-npm i -g Wizehive/zengine-migrator
+npm i -g ZengineHQ/zengine-migrator
 ```
 
 ## Usage
