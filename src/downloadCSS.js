@@ -5,8 +5,6 @@ const { relCwd, promisify } = require('./utils')
 const mkdirp = promisify(Mkdirp)
 
 const files = [
-  'vendors.min.css',
-  'vendor.min.css',
   'app.min.css',
   'default-plugins.min.css'
 ]
