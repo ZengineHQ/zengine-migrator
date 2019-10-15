@@ -6,7 +6,22 @@ const { cacheFile, cache, moveCachedFile } = require('./cache')
 const { blacklistDirs, blacklistFiles, blacklistHandlers } = require('./blacklist')
 const runDegit = require('./runDegit')
 const downloadCSS = require('./downloadCSS')
+const stringReplacer = require('./stringReplacer')
 
+/**
+ * @callback directoryHandler
+ * 
+ * @param {Error | null} err
+ * @param {fs.Dirent[]} entities
+ * 
+ * @returns {Promise<void>}
+ */
+
+/**
+ * @param {{ branch: string, user: string }}
+ * 
+ * @returns {directoryHandler}
+ */
 module.exports = ({ branch, user }) => async (err, entities) => {
   if (err) {
     return console.error(err)
@@ -46,6 +61,10 @@ module.exports = ({ branch, user }) => async (err, entities) => {
       return console.error(
         `Aborting due to existing "./${entity.name}/" directory. Please rename this directory and try again.`
       )
+    }
+
+    if (entity.name === 'src' && entity.isDirectory()) {
+      stringReplacer('src')
     }
   }
 
