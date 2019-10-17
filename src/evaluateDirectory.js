@@ -95,4 +95,6 @@ module.exports = ({ branch, user }) => async (err, entities) => {
   }
 
   await downloadCSS()
+
+  console.log('Complete!')
 }

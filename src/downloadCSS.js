@@ -13,6 +13,7 @@ const files = [
 ]
 
 module.exports = async () => {
+  console.log('Downloading css and images...')
   await mkdirp(relCwd('wrapper', 'css'))
   await mkdirp(relCwd('wrapper', 'images'))
 
