@@ -35,7 +35,10 @@ const stringReplacer = async (...segments) => {
         continue
       }
 
-      const updatedContents = contents.replace(/\$window/g, 'znWindow').replace(/\$scope.pluginName/g, 'plugin.namespace')
+      const updatedContents = contents
+        .replace(/\$window/g, 'znWindow')
+        .replace(/\$scope\.pluginName/g, 'plugin.namespace')
+        .replace(/\$scope\.\$parent\.pluginName/g, 'plugin.namespace')
 
       await writeFile(filePath, updatedContents).catch(err => console.error(`error migrating ${entity.name}`, err))
     }
