@@ -7,6 +7,7 @@ const { blacklistDirs, blacklistFiles, blacklistHandlers } = require('./blacklis
 const runDegit = require('./runDegit')
 const downloadCSS = require('./downloadCSS')
 const stringReplacer = require('./stringReplacer')
+const addEnvironmentScripts = require('./addEnvironmentScripts')
 
 /**
  * @callback directoryHandler
@@ -93,6 +94,8 @@ module.exports = ({ branch, user }) => async (err, entities) => {
       }
     }
   }
+
+  await addEnvironmentScripts()
 
   await downloadCSS()
 
