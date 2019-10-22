@@ -12,11 +12,11 @@ module.exports = async () => {
     try {
       const packageJSON = require(relCwd('package.json'))
 
+      const buildScript = packageJSON.scripts.build
+      const startScript = packageJSON.scripts.start
+
       Object.keys(mayaJSON.environments).forEach(key => {
         const environment = mayaJSON.environments[key]
-
-        const buildScript = packageJSON.scripts.build
-        const startScript = packageJSON.scripts.start
 
         packageJSON.scripts[`dev-${key}`] = `ZENGINE_ENV='${key}' ${startScript}`
         packageJSON.scripts[`build-${key}`] = `ZENGINE_ENV='${key}' ${buildScript}`

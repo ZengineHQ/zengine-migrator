@@ -17,19 +17,17 @@ module.exports = async () => {
   await mkdirp(relCwd('wrapper', 'css'))
   await mkdirp(relCwd('wrapper', 'images'))
 
-  const imageList = {}
-
   for (const file of files) {
     const dl = await downloadFile(`https://orgs-platform.zenginehq.com/dest/${file}`, relCwd('wrapper', 'css', file))
       .catch(err => err instanceof Error ? err : new Error(JSON.stringify(err)))
-    
+
     if (dl instanceof Error) {
       console.log(`Unable to download https://orgs-platform.zenginehq.com/dest/${file}. You'll need to handle this dependency manually.`)
     }
 
     let fileContents = await readFile(relCwd('wrapper', 'css', file), { encoding: 'utf8' })
       .catch(err => err instanceof Error ? err : new Error(JSON.stringify(err)))
-      
+
     if (fileContents instanceof Error) {
       console.error(`Unable to read contents of ${relCwd('wrapper', 'css', file)}. Images not downloaded.`)
       continue
@@ -38,6 +36,8 @@ module.exports = async () => {
     const urls = getURLs(fileContents)
 
     for (const url of urls) {
+      const imageList = {}
+
       if (!imageList[url]) {
         await downloadFile(
           `https://orgs-platform.zenginehq.com/${removeLeadingSlash(url)}`,
