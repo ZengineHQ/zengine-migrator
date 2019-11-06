@@ -8,6 +8,7 @@ const runDegit = require('./runDegit')
 const downloadCSS = require('./downloadCSS')
 const stringReplacer = require('./stringReplacer')
 const addEnvironmentScripts = require('./addEnvironmentScripts')
+const migrateNamespaces = require('./maya-namespace-migrate')
 
 /**
  * @callback directoryHandler
@@ -72,7 +73,7 @@ module.exports = ({ branch, user }) => async (err, entities) => {
   for (const filename of Object.keys(cache)) {
     const success = await moveCachedFile(filename)
       .catch(err => err instanceof Error ? err : new Error(JSON.stringify(err)))
-      
+
     if (success instanceof Error) {
       return console.error(`Aborting due to writefile error with ${filename} => moved-${filename}: `, success)
     }
@@ -88,7 +89,7 @@ module.exports = ({ branch, user }) => async (err, entities) => {
     if (typeof blacklistHandlers[filename] === 'function') {
       const successfulMove = await blacklistHandlers[filename](cache[filename])
         .catch(err => err instanceof Error ? err : new Error(JSON.stringify(err)))
-        
+
       if (successfulMove instanceof Error || !successfulMove) {
         console.error(`Unable to merge ${filename} files. Information may have been lost.`)
       }
@@ -96,6 +97,8 @@ module.exports = ({ branch, user }) => async (err, entities) => {
   }
 
   await addEnvironmentScripts()
+
+  await migrateNamespaces()
 
   await downloadCSS()
 
