@@ -98,8 +98,6 @@ module.exports = ({ branch, user }) => async (err, entities) => {
 
   await addEnvironmentScripts()
 
-  await migrateNamespaces()
-
   await downloadCSS()
 
   console.log('Complete!')
