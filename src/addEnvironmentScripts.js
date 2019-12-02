@@ -2,6 +2,7 @@ const path = require('path')
 const fs = require('fs')
 const { relCwd, promisify } = require('./utils')
 const writeFile = promisify(fs.writeFile)
+const readFile = promisify(fs.readFile)
 
 module.exports = async () => {
   const mayaJSON = fs.existsSync(relCwd('..', '..', 'maya.json')) && require(relCwd('..', '..', 'maya.json'))
@@ -10,7 +11,7 @@ module.exports = async () => {
 
   if (mayaJSON) {
     try {
-      const packageJSON = require(relCwd('package.json'))
+      const packageJSON = JSON.parse(await readFile(relCwd('package.json'), { encoding: 'utf8' }))
 
       const buildScript = packageJSON.scripts.build
       const startScript = packageJSON.scripts.start
