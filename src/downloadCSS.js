@@ -15,7 +15,7 @@ const files = [
 module.exports = async () => {
   console.log('Downloading css and images...')
   await mkdirp(relCwd('wrapper', 'css'))
-  await mkdirp(relCwd('wrapper', 'images'))
+  await mkdirp(relCwd('wrapper', 'imgs'))
 
   for (const file of files) {
     const dl = await downloadFile(`https://orgs-platform.zenginehq.com/dest/${file}`, relCwd('wrapper', 'css', file))
@@ -34,18 +34,17 @@ module.exports = async () => {
     }
 
     const urls = getURLs(fileContents)
+    const imageList = {}
 
     for (const url of urls) {
-      const imageList = {}
-
       if (!imageList[url]) {
         await downloadFile(
           `https://orgs-platform.zenginehq.com/${removeLeadingSlash(url)}`,
-          relCwd('wrapper', 'images', path.basename(url))
+          relCwd('wrapper', 'imgs', path.basename(url))
         )
           .catch(err => console.error(`unable to download ${url}`))
 
-        fileContents = fileContents.replace(url, `/images/${path.basename(url)}`)
+        fileContents = replaceAll(fileContents, `url(${url}`, `url(/imgs/${path.basename(url)}`)
         imageList[url] = true
       }
     }
@@ -69,6 +68,10 @@ function getURLs (contents) {
 
 function removeLeadingSlash (url) {
   return url.startsWith('/') ? url.slice(1) : url
+}
+
+function replaceAll (str, find, replace) {
+  return str.replace(new RegExp(find.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'g'), replace)
 }
 
 function downloadFile (url, dest) {
