@@ -54,7 +54,9 @@ module.exports = {
       if (fs.existsSync(gitignorePath) && contents) {
         const newGitignore = await readFile(gitignorePath, { encoding: 'utf8' })
 
-        const withOrWithoutPackageLock = contents.includes('package-lock.json') ? newGitignore : newGitignore.replace('package-lock.json', '')
+        const withOrWithoutPackageLock = contents.includes('package-lock.json')
+          ? newGitignore
+          : newGitignore.replace('package-lock.json', '')
 
         const written = await writeFile(gitignorePath, `${withOrWithoutPackageLock}\n\n# Original File:\n\n${contents}`)
           .catch(err => err instanceof Error ? err : new Error(JSON.stringify(err)))

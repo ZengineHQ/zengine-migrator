@@ -1,7 +1,8 @@
 const fs = require('fs')
 const path = require('path')
-const { promisify } = require('./utils')
+const { promisify, relCwd } = require('./utils')
 const readFile = promisify(fs.readFile)
+const writeFile = promisify(fs.writeFile)
 const { cacheFile, cache, moveCachedFile } = require('./cache')
 const { blacklistDirs, blacklistFiles, blacklistHandlers } = require('./blacklist')
 const runDegit = require('./runDegit')
@@ -83,6 +84,10 @@ module.exports = ({ branch, user }) => async (err, entities) => {
 
   if (!clonedSuccessfully) {
     return console.error(`Unable to clone repository. Aborted.`)
+  }
+
+  if (!cache['.gitignore']) {
+    await writeFile(relCwd('.gitignore'), fs.readFileSync(relCwd('.gitignore'), { encoding: 'utf8' }).replace('package-lock.json', ''))
   }
 
   for (const filename of Object.keys(cache)) {
