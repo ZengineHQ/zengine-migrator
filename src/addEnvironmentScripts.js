@@ -19,12 +19,12 @@ module.exports = async () => {
       Object.keys(mayaJSON.environments).forEach(key => {
         const environment = mayaJSON.environments[key]
 
-        packageJSON.scripts[`dev-${key}`] = `ZENGINE_ENV='${key}' ${startScript}`
-        packageJSON.scripts[`build-${key}`] = `ZENGINE_ENV='${key}' ${buildScript}`
+        packageJSON.scripts[`dev-${key}`] = `rm -rf dist; ZENGINE_ENV='${key}' ${startScript}`
+        packageJSON.scripts[`build-${key}`] = `rm -rf dist; ZENGINE_ENV='${key}' ${buildScript}`
 
         if (environment.default) {
-          packageJSON.scripts.start = `ZENGINE_ENV='${key}' ${startScript}`
-          packageJSON.scripts.build = `ZENGINE_ENV='${key}' ${buildScript}`
+          packageJSON.scripts.start = `rm -rf dist; ZENGINE_ENV='${key}' ${startScript}`
+          packageJSON.scripts.build = `rm -rf dist; ZENGINE_ENV='${key}' ${buildScript}`
         }
       })
 
