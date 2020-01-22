@@ -23,8 +23,8 @@ module.exports = async () => {
         packageJSON.scripts[`build-${key}`] = `rm -rf dist; ZENGINE_ENV='${key}' ${buildScript}`
 
         if (environment.default) {
-          packageJSON.scripts.start = `rm -rf dist; ZENGINE_ENV='${key}' ${startScript}`
-          packageJSON.scripts.build = `rm -rf dist; ZENGINE_ENV='${key}' ${buildScript}`
+          packageJSON.scripts.start = `rm -rf dist; ${startScript}`
+          packageJSON.scripts.build = `rm -rf dist; ${buildScript}`
         }
       })
 
