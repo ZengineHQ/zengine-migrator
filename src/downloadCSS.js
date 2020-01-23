@@ -18,11 +18,11 @@ module.exports = async () => {
   await mkdirp(relCwd('wrapper', 'imgs'))
 
   for (const file of files) {
-    const dl = await downloadFile(`https://orgs-platform.zenginehq.com/dest/${file}`, relCwd('wrapper', 'css', file))
+    const dl = await downloadFile(`https://stage-platform.zenginehq.com/dest/${file}`, relCwd('wrapper', 'css', file))
       .catch(err => err instanceof Error ? err : new Error(JSON.stringify(err)))
 
     if (dl instanceof Error) {
-      console.log(`Unable to download https://orgs-platform.zenginehq.com/dest/${file}. You'll need to handle this dependency manually.`)
+      console.log(`Unable to download https://stage-platform.zenginehq.com/dest/${file}. You'll need to handle this dependency manually.`)
     }
 
     let fileContents = await readFile(relCwd('wrapper', 'css', file), { encoding: 'utf8' })
@@ -39,7 +39,7 @@ module.exports = async () => {
     for (const url of urls) {
       if (!imageList[url]) {
         await downloadFile(
-          `https://orgs-platform.zenginehq.com/${removeLeadingSlash(url)}`,
+          `https://stage-platform.zenginehq.com/${removeLeadingSlash(url)}`,
           relCwd('wrapper', 'imgs', path.basename(url))
         )
           .catch(err => console.error(`unable to download ${url}`))
