@@ -9,7 +9,6 @@ const runDegit = require('./runDegit')
 const downloadCSS = require('./downloadCSS')
 const stringReplacer = require('./stringReplacer')
 const addEnvironmentScripts = require('./addEnvironmentScripts')
-const migrateNamespaces = require('./maya-namespace-migrate')
 
 /**
  * @callback directoryHandler
