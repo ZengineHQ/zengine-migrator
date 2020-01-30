@@ -14,11 +14,12 @@ const notifier = updateNotifier({ pkg, updateCheckInterval: 1 })
 notifier.notify()
 
 program
+  .description('CLI for transforming legacy Zengine plugins into version 2 compatible repositories\n\nMigrate an existing repository from any frontend directory, or\n\nStarting in an empty directory, build a full repository from scratch by passing an ID and token')
   .option('-b --branch <branch>', 'specify a branch of the legacy wrapper repo', str => `#${str}`, '#master')
   .option('-u --user <user>', 'specify the github user for the legacy wrapper repo', str => `${str}/`, 'ZengineHQ/')
   .option('-i --id <id>', 'specify the id of plugin code to fetch from Zengine API', Number)
   .option('-t --token <token>', 'specify the access token for fetching plugin code')
-  .option('-d --dirname <dirname>', 'specify the name of your frontend code directory')
+  .option('-d --dirname <dirname>', 'specify the name of your frontend code directory (fetched code will be saved at ./plugins/<dirname>/src)')
   .parse(process.argv)
 
 async function execute () {
