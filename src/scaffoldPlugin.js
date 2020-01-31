@@ -39,8 +39,8 @@ module.exports = async (id, token, dirname) => {
   }
 
   await Promise.all([
-    createMayaJSON('maya.json', plugin),
-    createMayaJSON('maya.example.json', plugin),
+    createMayaJSON('maya.json', frontendDir, plugin),
+    createMayaJSON('maya.example.json', frontendDir, plugin),
     createGitignore(),
     createReadMe(plugin.name)
   ])
@@ -69,7 +69,7 @@ async function getPlugin(id, token) {
   return data
 }
 
-function createMayaJSON (filename, { dir, id, namespace, route }) {
+function createMayaJSON (filename, dir, { id, namespace, route }) {
   return writeFile(path.resolve(`./${filename}`), JSON.stringify({
     environments: ['prod', 'stage', 'dev'].reduce((envs, env) => ({
       ...envs,
