@@ -20,13 +20,13 @@ module.exports = async (id, token, dirname) => {
     })
   }
 
-  await mkdirp(path.resolve(`./plugins/${frontendDir}/src`)).catch(err => console.error('Error creating directory:', err))
-
   const plugin = await getPlugin(id, token)
 
   if (!plugin) {
     throw new Error('Check the parameters you passed and try again.')
   }
+
+  await mkdirp(path.resolve(`./plugins/${frontendDir}/src`)).catch(err => console.error('Error creating directory:', err))
 
   for (const ext of ['js', 'html', 'css']) {
     // convert file to wgn?
@@ -64,7 +64,13 @@ async function getPlugin(id, token) {
     return null
   }
 
-  const { data = null } = (await res.json().catch(e => null) || {})
+  const { data = {} } = (await res.json().catch(e => null) || {})
+
+  if (!data.js || !data.css || !data.html) {
+    console.error('You do not have permission to access this plugin\'s code.')
+
+    return null
+  }
 
   return data
 }
