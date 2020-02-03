@@ -4,10 +4,8 @@
   "description": "CLI Tool for Setting Up Migration Environment for Zengine Plugins",
   "main": "index.js",
   "bin": {
+    "zengine-migrator": "index.js",
     "zmig": "index.js"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -28,6 +26,7 @@
     "commander": "^3.0.2",
     "degit": "^2.1.4",
     "mkdirp": "^0.5.1",
+    "node-fetch": "^2.6.0",
     "update-notifier": "^3.0.1"
   },
   "devDependencies": {
