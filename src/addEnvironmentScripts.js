@@ -20,11 +20,11 @@ module.exports = async () => {
         const environment = mayaJSON.environments[key]
 
         packageJSON.scripts[`dev-${key}`] = `rm -rf dist; ZENGINE_ENV='${key}' ${startScript}`
-        packageJSON.scripts[`build-${key}`] = `rm -rf dist .cache; ZENGINE_ENV='${key}' ${buildScript}`
+        packageJSON.scripts[`build-${key}`] = `rm -rf dist; ZENGINE_ENV='${key}' ${buildScript}`
 
         if (environment.default) {
           packageJSON.scripts.start = `rm -rf dist; ${startScript}`
-          packageJSON.scripts.build = `rm -rf dist .cache; ${buildScript}`
+          packageJSON.scripts.build = `rm -rf dist; ${buildScript}`
         }
       })
 
